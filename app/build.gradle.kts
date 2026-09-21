@@ -44,4 +44,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.8.5")
     annotationProcessor("androidx.room:room-compiler:2.8.5")
     implementation("androidx.room:room-common:2.8.5")
+
+    implementation("androidx.core:core:1.13.1")
 }
