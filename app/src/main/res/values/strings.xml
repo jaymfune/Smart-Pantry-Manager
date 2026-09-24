@@ -7,4 +7,6 @@
     <string name="quantity">Quantity</string>
     <string name="unit_e_g_g_ml_unit_clove">Unit (e.g. g, ml, unit, clove)</string>
     <string name="save">Save</string>
+    <string name="no_recipes_match_your_pantry_yet_add_more_ingredients">No recipes match your pantry yet - add more ingredients</string>
+    <string name="view_suggested_recipes">View Suggested Recipes</string>
 </resources>

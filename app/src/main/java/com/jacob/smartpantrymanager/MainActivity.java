@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity
             // Open the Add/Edit ingredient screen.
             startActivity(intent);
         });
+
+        findViewById(R.id.btnViewSuggestions).setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, SuggestedRecipesActivity.class)));
     }
 
     @Override
