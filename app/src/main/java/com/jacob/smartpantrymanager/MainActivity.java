@@ -46,9 +46,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         View rootView = findViewById(android.R.id.content);
+        com.google.android.material.bottomnavigation.BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
+
         ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            bottomNav.setPadding(
+                    bottomNav.getPaddingLeft(), bottomNav.getPaddingTop(),
+                    bottomNav.getPaddingRight(), systemBars.bottom);
             return insets;
         });
 
@@ -82,16 +87,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         });
 
-        findViewById(R.id.btnViewSuggestions).setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, SuggestedRecipesActivity.class)));
+        // bottomNavigation
+        NavigationHelper.setup(this, findViewById(R.id.bottomNavigation), R.id.nav_pantry);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Reload the pantry items every time we return to this screen.
-        // This makes sure new, edited, or deleted items appear immediately.
+        NavigationHelper.highlightTab(findViewById(R.id.bottomNavigation), R.id.nav_pantry);
         loadPantryItems();
     }
 

@@ -1,5 +1,6 @@
 package com.jacob.smartpantrymanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -52,24 +53,14 @@ public class SuggestedRecipesActivity extends AppCompatActivity
 
         // Get the root view of the Activity.
         View rootView = findViewById(android.R.id.content);
+        com.google.android.material.bottomnavigation.BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
 
-        // Add padding so the screen does not overlap with
-        // system areas such as the status bar or navigation bar.
         ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
-
-            // Get the size of the system bar areas.
-            Insets systemBars = insets.getInsets(
-                    WindowInsetsCompat.Type.systemBars()
-            );
-
-            // Add padding around the screen using the system bar sizes.
-            v.setPadding(
-                    systemBars.left,
-                    systemBars.top,
-                    systemBars.right,
-                    systemBars.bottom
-            );
-
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            bottomNav.setPadding(
+                    bottomNav.getPaddingLeft(), bottomNav.getPaddingTop(),
+                    bottomNav.getPaddingRight(), systemBars.bottom);
             return insets;
         });
 
@@ -91,14 +82,15 @@ public class SuggestedRecipesActivity extends AppCompatActivity
 
         // Connect the adapter to the RecyclerView.
         recyclerView.setAdapter(adapter);
+
+        // Bottom navigation
+        NavigationHelper.setup(this, findViewById(R.id.bottomNavigation), R.id.nav_pantry);NavigationHelper.setup(this, findViewById(R.id.bottomNavigation), R.id.nav_suggested);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Reload the suggested recipes every time this screen
-        // becomes visible because the pantry may have changed.
+        NavigationHelper.highlightTab(findViewById(R.id.bottomNavigation), R.id.nav_suggested);
         loadSuggestedRecipes();
     }
 
@@ -162,8 +154,8 @@ public class SuggestedRecipesActivity extends AppCompatActivity
 
     @Override
     public void onRecipeClick(Recipe recipe) {
-
-        // The recipe detail screen will be connected here
-        // in the next phase of the project.
+        Intent intent = new Intent(SuggestedRecipesActivity.this, RecipeDetailActivity.class);
+        intent.putExtra(EXTRA_RECIPE_ID, recipe.id);
+        startActivity(intent);
     }
 }

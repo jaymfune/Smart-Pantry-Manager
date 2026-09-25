@@ -70,10 +70,9 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
 
         // Create text showing the quantity and unit.
         // Example: "2 kg"
-        String qtyText = item.quantity + " " + item.unit;
-
-        // Display the quantity and unit.
-        holder.tvQuantity.setText(qtyText);
+        holder.tvQuantity.setText(
+                com.jacob.smartpantrymanager.logic.UnitDisplayHelper.formatForDisplay(
+                        holder.itemView.getContext(), item.quantity, item.unit));
 
         // Tell the listener when the pantry item is clicked.
         holder.itemView.setOnClickListener(v -> listener.onItemClick(item));
