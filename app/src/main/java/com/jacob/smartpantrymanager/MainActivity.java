@@ -74,19 +74,6 @@ public class MainActivity extends AppCompatActivity
         // Connect the adapter to the RecyclerView.
         recyclerView.setAdapter(adapter);
 
-        // When the add button is clicked, open the Add/Edit screen.
-        findViewById(R.id.fabAddItem).setOnClickListener(v -> {
-
-            // Create an Intent to open AddEditIngredientActivity.
-            Intent intent = new Intent(
-                    MainActivity.this,
-                    AddEditIngredientActivity.class
-            );
-
-            // Open the Add/Edit ingredient screen.
-            startActivity(intent);
-        });
-
         // bottomNavigation
         NavigationHelper.setup(this, findViewById(R.id.bottomNavigation), R.id.nav_pantry);
     }
